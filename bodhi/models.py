@@ -10,13 +10,14 @@ class User(db.Model):
 	password = db.Column(db.String(20))
 	gender = db.Column(db.String(3))
 	join_date = db.Column(db.TIMESTAMP)
-	stress_level = db.relationship('Stress_Level', backref = 'user', lazy='dynamic')
+	stress_level = db.relationship('Stress', backref = 'user', lazy='dynamic')
 	outlets = db.relationship('Outlets', backref = 'user', lazy = 'dynamic')
 	physical_activity = db.relationship('Physical_Activity', backref ='user', lazy ='dynamic')
 	indulgences = db.relationship('Indulgences', backref = 'user', lazy = "dynamic")
 	diet = db.relationship('Diet', backref = 'user', lazy = 'dynamic')
 	sleep = db.relationship('Sleep', backref='user', lazy = 'dynamic')
 	cognitive_condition = db.relationship('Cognitive_Condition', backref='user',lazy = 'dynamic')
+	sexual_activity = db.relationship('Sexual_Activity', backref='user', lazy='dynamic')
 	goals = db.relationship('Goals', backref='user', lazy = 'dynamic')
 
 	def __init__(self, first_name, last_name, email, password, gender, join_date):
@@ -27,32 +28,11 @@ class User(db.Model):
 		self.gender= gender
 		self.join_date = join_date
 
-class Stress_Level(db.Model):
+class Stress(db.Model):
 	__tablename__='stress_level'
 	id = db.Column(db.Integer,primary_key=True)
 	entry_date = db.Column(db.TIMESTAMP)
 	level= db.Column(db.Integer)
-	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-	male_stress_causes = db.relationship('Male_Stress_Causes', backref = 'stress_level', lazy ='dynamic')
-	female_stress_causes = db.relationship('Female_Stress_Causes', backref = 'stress_level', lazy ='dynamic')
-
-class Male_Stress_Causes(db.Model):
-	__tablename__='male_stress_causes'
-	id= db.Column(db.Integer,primary_key=True)
-	entry_date = db.Column(db.TIMESTAMP)
-	relationship = db.Column(db.Boolean, default = False )
-	family = db.Column(db.Boolean, default=False)
-	school = db.Column(db.Boolean, default =False)
-	friends = db.Column(db.Boolean, default=False)
-	work = db.Column(db.Boolean, default=False)
-	unclear = db.Column(db.Boolean, default=False)
-	other = db.Column(db.Boolean, default=False)  
-	stress_id = db.Column(db.Integer, db.ForeignKey('stress_level.id'))
-
-class Female_Stress_Causes(db.Model):
-	__tablename__='female_stress_causes'
-	id= db.Column(db.Integer,primary_key=True)
-	entry_date = db.Column(db.TIMESTAMP)
 	relationship = db.Column(db.Boolean, default = False )
 	family = db.Column(db.Boolean, default=False)
 	school = db.Column(db.Boolean, default =False)
@@ -61,7 +41,37 @@ class Female_Stress_Causes(db.Model):
 	unclear = db.Column(db.Boolean, default=False)
 	other = db.Column(db.Boolean, default=False)
 	pms = db.Column(db.Boolean, default=False)  
-	stress_id = db.Column(db.Integer, db.ForeignKey('stress_level.id'))	
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+	# male_stress_causes = db.relationship('Male_Stress_Causes', backref = 'stress_level', lazy ='dynamic')
+	# female_stress_causes = db.relationship('Female_Stress_Causes', backref = 'stress_level', lazy ='dynamic')
+
+# class Male_Stress_Causes(db.Model):
+# 	__tablename__='male_stress_causes'
+# 	id= db.Column(db.Integer,primary_key=True)
+# 	entry_date = db.Column(db.TIMESTAMP)
+# 	relationship = db.Column(db.Boolean, default = False )
+# 	family = db.Column(db.Boolean, default=False)
+# 	school = db.Column(db.Boolean, default =False)
+# 	friends = db.Column(db.Boolean, default=False)
+# 	work = db.Column(db.Boolean, default=False)
+# 	unclear = db.Column(db.Boolean, default=False)
+# 	other = db.Column(db.Boolean, default=False)  
+# 	stress_id = db.Column(db.Integer, db.ForeignKey('stress_level.id'))
+
+# class Female_Stress_Causes(db.Model):
+# 	__tablename__='female_stress_causes'
+# 	id= db.Column(db.Integer,primary_key=True)
+# 	entry_date = db.Column(db.TIMESTAMP)
+# 	relationship = db.Column(db.Boolean, default = False )
+# 	family = db.Column(db.Boolean, default=False)
+# 	school = db.Column(db.Boolean, default =False)
+# 	friends = db.Column(db.Boolean, default=False)
+# 	work = db.Column(db.Boolean, default=False)
+# 	unclear = db.Column(db.Boolean, default=False)
+# 	other = db.Column(db.Boolean, default=False)
+# 	pms = db.Column(db.Boolean, default=False)  
+# 	stress_id = db.Column(db.Integer, db.ForeignKey('stress_level.id'))	
 
 class Outlets(db.Model):
 	__tablename__= 'outlets'
@@ -147,6 +157,7 @@ class Sexual_Activity(db.Model):
 	__tablename__='sexual_activity'
 	id = db.Column(db.Integer, primary_key=True)
 	entry_date=db.Column(db.TIMESTAMP)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class Goals(db.Model):
 	__tablename__='goals'
