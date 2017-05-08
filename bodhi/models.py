@@ -28,6 +28,17 @@ class User(db.Model):
 		self.gender= gender
 		self.join_date = join_date
 
+	def serialize(self):
+		return{
+		'id' : self.id,
+		'first_name':self.first_name,
+		'last_name':self.last_name,
+		'email':self.email,
+		'password':self.password,
+		'gender':self.gender,
+		'join_date':self.join_date
+		}
+
 class Stress(db.Model):
 	__tablename__='stress_level'
 	id = db.Column(db.Integer,primary_key=True)
@@ -42,6 +53,22 @@ class Stress(db.Model):
 	other = db.Column(db.Boolean, default=False)
 	pms = db.Column(db.Boolean, default=False)  
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+	def serialize(self):
+		return{
+		'id':self.id,
+		'entry_date':self.entry_date,
+		'level':self.level,
+		'relationship':self.relationship,
+		'family':self.family,
+		'school':self.school,
+		'friends':self.friends,
+		'work':self.work,
+		'unclear':self.unclear,
+		'other':self.other,
+		'pms':self.pms,
+		'user_id':self.user_id
+		}
 
 	# male_stress_causes = db.relationship('Male_Stress_Causes', backref = 'stress_level', lazy ='dynamic')
 	# female_stress_causes = db.relationship('Female_Stress_Causes', backref = 'stress_level', lazy ='dynamic')
@@ -113,6 +140,17 @@ class Diet(db.Model):
 	meat = db.Column(db.Boolean, default=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+	def serialize(self):
+		return{
+		'id':self.id,
+		'entry_date':self.entry_date,
+		'fast':self.fast,
+		'dairy':self.dairy,
+		'gluten':self.gluten,
+		'meat':self.meat,
+		'user_id':self.user_id
+		}
+
 class Sleep(db.Model):
 	__tablename__='sleep'
 	id = db.Column(db.Integer, primary_key=True) 
@@ -120,6 +158,15 @@ class Sleep(db.Model):
 	hours = db.Column(db.Integer)
 	quality = db.Column(db.Boolean, default=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+	def serialize(self):
+		return{
+		'id':self.id,
+		'entry_date':self.entry_date,
+		'hours':self.hours,
+		'quality':self.quality,
+		'user_id':self.user_id
+		}
 
 class Cognitive_Condition(db.Model):
 	__tablename__='cognitive_condition'
