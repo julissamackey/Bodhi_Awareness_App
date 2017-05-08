@@ -140,7 +140,7 @@ class Physical_Condition(db.Model):
 	hungry = db.Column(db.Boolean,default=False)
 	sick = db.Column(db.Boolean,default=False)
 	headache = db.Column(db.Boolean, default=False)
-	stomach_ache =db.Column(db.Boolean,, default=False) 
+	stomach_ache =db.Column(db.Boolean,default=False) 
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class Sexual_Activity(db.Model):
