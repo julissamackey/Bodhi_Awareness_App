@@ -17,8 +17,10 @@ class User(db.Model):
 	diet = db.relationship('Diet', backref = 'user', lazy = 'dynamic')
 	sleep = db.relationship('Sleep', backref='user', lazy = 'dynamic')
 	cognitive_condition = db.relationship('Cognitive_Condition', backref='user',lazy = 'dynamic')
+	physical_condition = db.relationship('Physical_Condition', backref='user', lazy='dynamic')
 	sexual_activity = db.relationship('Sexual_Activity', backref='user', lazy='dynamic')
 	goals = db.relationship('Goals', backref='user', lazy = 'dynamic')
+	to_do= db.relationship('Tasks', backref ='user', lazy='dynamic')
 
 	def __init__(self, first_name, last_name, email, password, gender, join_date):
 		self.first_name = first_name
@@ -70,36 +72,6 @@ class Stress(db.Model):
 		'user_id':self.user_id
 		}
 
-	# male_stress_causes = db.relationship('Male_Stress_Causes', backref = 'stress_level', lazy ='dynamic')
-	# female_stress_causes = db.relationship('Female_Stress_Causes', backref = 'stress_level', lazy ='dynamic')
-
-# class Male_Stress_Causes(db.Model):
-# 	__tablename__='male_stress_causes'
-# 	id= db.Column(db.Integer,primary_key=True)
-# 	entry_date = db.Column(db.TIMESTAMP)
-# 	relationship = db.Column(db.Boolean, default = False )
-# 	family = db.Column(db.Boolean, default=False)
-# 	school = db.Column(db.Boolean, default =False)
-# 	friends = db.Column(db.Boolean, default=False)
-# 	work = db.Column(db.Boolean, default=False)
-# 	unclear = db.Column(db.Boolean, default=False)
-# 	other = db.Column(db.Boolean, default=False)  
-# 	stress_id = db.Column(db.Integer, db.ForeignKey('stress_level.id'))
-
-# class Female_Stress_Causes(db.Model):
-# 	__tablename__='female_stress_causes'
-# 	id= db.Column(db.Integer,primary_key=True)
-# 	entry_date = db.Column(db.TIMESTAMP)
-# 	relationship = db.Column(db.Boolean, default = False )
-# 	family = db.Column(db.Boolean, default=False)
-# 	school = db.Column(db.Boolean, default =False)
-# 	friends = db.Column(db.Boolean, default=False)
-# 	work = db.Column(db.Boolean, default=False)
-# 	unclear = db.Column(db.Boolean, default=False)
-# 	other = db.Column(db.Boolean, default=False)
-# 	pms = db.Column(db.Boolean, default=False)  
-# 	stress_id = db.Column(db.Integer, db.ForeignKey('stress_level.id'))	
-
 class Outlets(db.Model):
 	__tablename__= 'outlets'
 	id = db.Column(db.Integer, primary_key=True) 
@@ -108,6 +80,16 @@ class Outlets(db.Model):
 	meditated = db.Column(db.Boolean, default=False)
 	other = db.Column(db.Boolean, default=False)
 	user_id =  db.Column(db.Integer, db.ForeignKey('user.id')) 
+
+	def serialize(self):
+		return{
+		'id':self.id,
+		'entry_date':self.entry_date,
+		'journaled':self.journaled,
+		'meditated':self.meditated,
+		'other':self.other,
+		'user_id':self.user_id
+		}
 
 class Physical_Activity(db.Model):
 	__tablename__='physical_activity'
@@ -119,6 +101,17 @@ class Physical_Activity(db.Model):
 	other = db.Column(db.Boolean, default=False)
 	user_id= db.Column(db.Integer, db.ForeignKey('user.id'))
 
+	def serialize(self):
+		return{
+		'id':self.id,
+		'entry_date':self.entry_date,
+		'yoga_pilates':self.yoga_pilates,
+		'cardio': self.cardio,
+		'toning':self.toning,
+		'other':self.other,
+		'user_id':self.user_id
+		}
+
 class Indulgences(db.Model):
 	__tablename__='indulgences'
 	id = db.Column(db.Integer, primary_key=True) 
@@ -129,6 +122,18 @@ class Indulgences(db.Model):
 	other = db.Column(db.Boolean, default=False)
 	coffee = db.Column(db.Boolean,default=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+	def serialize(self):
+		return{
+		'id':self.id,
+		'entry_date':self.entry_date,
+		'alcohol':self.alcohol,
+		'tobacco':self.tobacco,
+		'sweets':self.sweets,
+		'other':self.other,
+		'coffee':self.coffee,
+		'user_id':self.user_id
+	}
 
 class Diet(db.Model):
 	__tablename__='diet'
@@ -184,6 +189,23 @@ class Cognitive_Condition(db.Model):
 	mindful = db.Column(db.Boolean,default=False)
 	user_id=db.Column(db.Integer, db.ForeignKey('user.id'))
 
+	def serialize(self):
+		return{
+		'id':self.id,
+		'entry_date':self.entry_date,
+		'energized':self.energized,
+		'calm':self.calm,
+		'irritable':self.irritable,
+		'confident':self.confident,
+		'anxious':self.anxious,
+		'distracted':self.distracted,
+		'focused':self.focused,
+		'creative':self.creative,
+		'apathetic':self.apathetic,
+		'mindful':self.mindful,
+		'user_id':self.user_id
+		}
+
 class Physical_Condition(db.Model):
 	__tablename__='physical_condition'
 	id = db.Column(db.Integer, primary_key=True)
@@ -200,11 +222,35 @@ class Physical_Condition(db.Model):
 	stomach_ache =db.Column(db.Boolean,default=False) 
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+	def serialize(self):
+		return{
+		'id':self.id,
+		'entry_date':self.entry_date,
+		'sore':self.sore,
+		'fatigued':self.fatigued,
+		'bloated':self.bloated,
+		'constipated':self.constipated,
+		'nauseous':self.nauseous,
+		'acne_breakout':self.acne_breakout,
+		'hungry':self.hungry,
+		'sick':self.sick,
+		'headache':self.headache,
+		'stomach_ache':self.stomach_ache,
+		'user_id':self.user_id
+		}
+
 class Sexual_Activity(db.Model):
 	__tablename__='sexual_activity'
 	id = db.Column(db.Integer, primary_key=True)
 	entry_date=db.Column(db.TIMESTAMP)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+	def serialize(self):
+		return{
+		'id':self.id,
+		'entry_date':self.entry_date,
+		'user_id':self.user_id
+		}
 
 class Goals(db.Model):
 	__tablename__='goals'
@@ -214,4 +260,29 @@ class Goals(db.Model):
 	complete = db.Column(db.Boolean, default=False)
 	user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
 
+	def serialize(self):
+		return{
+		'id':self.id,
+		'entry_date':self.entry_date,
+		'goal':self.goal,
+		'complete':self.complete,
+		'user_id':self.user_id
+		}
+
+class Tasks(db.Model):
+	__tablename__='to_do'
+	id = db.Column(db.Integer, primary_key=True)
+	entry_date=db.Column(db.TIMESTAMP)
+	task = db.Column(db.String(40))
+	complete = db.Column(db.Boolean, default=False)
+	user_id= db.Column(db.Integer, db.ForeignKey('user.id'))
+
+	def serialize(self):
+		return{
+		'id':self.id,
+		'entry_date':self.entry_date,
+		'task':self.task,
+		'complete':self.complete,
+		'user_id':self.user_id
+		}
 
