@@ -232,6 +232,16 @@ def show_goals(user):
 		occassions.append(t)
 	return occassions	
 
+def log_goals(new_entry):
+	entry_date = new_entry['entry_date']
+	goal = new_entry['goal']
+	complete= new_entry['complete']
+	user = User.query.filter_by(email=new_entry['user']).first()
+	data = Goals(entry_date,goal,complete,user)
+	db.session.add(data)
+	db.session.commit()	
+	return 'success'		
+
 def show_user_tasks(user):
 	occassions = []
 	user = User.query.filter_by(email=user).first()

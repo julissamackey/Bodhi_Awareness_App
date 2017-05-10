@@ -197,11 +197,21 @@ def user_sexual_activity():
 		results= log_sexual_activity(new_entry)
 		return results
 
-@app.route('/goals', methods=['GET'])
+@app.route('/goals', methods=['GET','POST'])
 def user_goals():
 	user = request.args.get('user')
-	results = show_goals(user)
-	return jsonify( resposne= results)
+	if request.method == 'GET':
+		results = show_goals(user)
+		return jsonify( resposne= results)
+	else:
+		new_entry={
+		'entry_date':datetime.date.today(),
+		'goal':request.json['goal'],
+		'complete':request.json['complete'],
+		'user':user
+		}
+		results = log_goals(new_entry)
+		return results
 
 @app.route('/tasks', methods=['GET'])
 def user_tasks():

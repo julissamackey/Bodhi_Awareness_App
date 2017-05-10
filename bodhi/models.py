@@ -343,6 +343,12 @@ class Goals(db.Model):
 	complete = db.Column(db.Boolean, default=False)
 	user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
 
+	def __init__(self, entry_date,goal,complete,user):
+		self.entry_date=entry_date
+		self.goal=goal
+		self.complete=complete,
+		self.user=user
+
 	def serialize(self):
 		return{
 		'id':self.id,
