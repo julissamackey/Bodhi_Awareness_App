@@ -55,7 +55,18 @@ def show_outlets(user):
 	for entry in outlets:
 		t = entry.serialize()
 		occassions.append(t)
-	return occassions
+	return occassions	
+
+def log_outlets(new_entry):
+	entry_date = new_entry['entry_date']
+	journaled = new_entry['journaled']
+	meditated = new_entry['meditated']
+	other = new_entry['other']
+	user = User.query.filter_by(email=new_entry['user']).first()
+	data = Outlets(entry_date,journaled,meditated,other,user)
+	db.session.add(data)
+	db.session.commit()	
+	return 'success'
 
 def show_physical_activity(user):
 	occassions = []

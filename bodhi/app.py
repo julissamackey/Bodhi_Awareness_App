@@ -46,11 +46,22 @@ def user_stress():
 		results = log_stress(new_entry)
 		return results
 			
-@app.route('/outlets', methods=['GET'])
+@app.route('/outlets', methods=['GET', 'POST'])
 def user_outlets():
 	user = request.args.get('user')
-	results = show_outlets(user)
-	return jsonify(response = results)
+	if request.method == 'GET':
+		results = show_outlets(user)
+		return jsonify(response = results)
+	else:
+		new_entry={
+		'entry_date':datetime.date.today(),
+		'journaled':request.json['journaled'],
+		'meditated':request.json['meditated'],
+		'other':request.json['other'],
+		'user':user
+		}
+		results=log_outlets(new_entry)
+		return results
 
 @app.route('/physical-activity',methods =['GET'])
 def user_physical_activity():

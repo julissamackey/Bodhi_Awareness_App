@@ -94,6 +94,13 @@ class Outlets(db.Model):
 	other = db.Column(db.Boolean, default=False)
 	user_id =  db.Column(db.Integer, db.ForeignKey('user.id')) 
 
+	def __init__(self, entry_date,journaled,meditated,other,user):
+		self.entry_date=entry_date
+		self.journaled=journaled
+		self.meditated=meditated
+		self.other=other
+		self.user=user
+
 	def serialize(self):
 		return{
 		'id':self.id,
