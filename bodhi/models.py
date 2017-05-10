@@ -287,6 +287,20 @@ class Physical_Condition(db.Model):
 	stomach_ache =db.Column(db.Boolean,default=False) 
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+	def __init__(self, entry_date, sore, fatigued,bloated,constipated,nauseous,acne_breakout,hungry,sick,headache,stomach_ache, user):
+		self.entry_date=entry_date
+		self.sore=sore
+		self.fatigued=fatigued
+		self.bloated=bloated
+		self.constipated=constipated
+		self.nauseous=nauseous
+		self.acne_breakout=acne_breakout
+		self.hungry=hungry
+		self.sick=sick
+		self.headache=headache
+		self.stomach_ache=stomach_ache
+		self.user=user
+
 	def serialize(self):
 		return{
 		'id':self.id,

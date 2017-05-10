@@ -159,11 +159,29 @@ def user_cog_cond():
 		results=log_cog_cond(new_entry)
 		return results	
 
-@app.route('/physical-cond', methods=['GET'])
+@app.route('/physical-cond', methods=['GET', 'POST'])
 def user_physical_cond():
 	user = request.args.get('user')
-	results = show_physical_cond(user)
-	return jsonify(response= results)
+	if request.method == 'GET':
+		results = show_physical_cond(user)
+		return jsonify(response= results)
+	else:
+		new_entry={
+		'entry_date':datetime.date.today(),
+		'sore':request.json['sore'],
+		'fatigued':request.json['fatigued'],
+		'bloated':request.json['bloated'],
+		'constipated':request.json['constipated'],
+		'nauseous':request.json['nauseous'],
+		'acne_breakout':request.json['acne_breakout'],
+		'hungry':request.json['hungry'],
+		'sick':request.json['sick'],
+		'headache':request.json['headache'],
+		'stomach_ache':request.json['stomach_ache'],
+		'user':user			
+		}	
+		results = log_physical_cond(new_entry)
+		return results
 
 @app.route('/sexual-activity', methods=['GET'])
 def user_sexual_activity():

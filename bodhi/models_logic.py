@@ -188,6 +188,24 @@ def show_physical_cond(user):
 		occassions.append(t)
 	return occassions	
 
+def log_physical_cond(new_entry):
+	entry_date = new_entry['entry_date']
+	sore = new_entry['sore']
+	fatigued = new_entry['fatigued']
+	bloated = new_entry['bloated']
+	constipated = new_entry['constipated']
+	nauseous = new_entry['nauseous']
+	acne_breakout = new_entry['acne_breakout']
+	hungry = new_entry['hungry']
+	sick = new_entry['sick']
+	headache = new_entry['headache']
+	stomach_ache = new_entry['stomach_ache']
+	user = User.query.filter_by(email=new_entry['user']).first()
+	data = Physical_Condition(entry_date,sore, fatigued,bloated,constipated,nauseous,acne_breakout,hungry,sick,headache,stomach_ache,user)
+	db.session.add(data)
+	db.session.commit()	
+	return 'success'
+
 def show_sexual_activity(user):
 	occassions = []
 	user = User.query.filter_by(email=user).first()
