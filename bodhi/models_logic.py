@@ -77,6 +77,18 @@ def show_physical_activity(user):
 		occassions.append(t)
 	return occassions
 
+def log_physical_activity(new_entry):
+	entry_date = new_entry['entry_date']
+	yoga_pilates = new_entry['yoga_pilates']
+	cardio = new_entry['cardio']
+	toning = new_entry['toning']
+	other = new_entry['other']
+	user = User.query.filter_by(email=new_entry['user']).first()
+	data = Physical_Activity(entry_date,yoga_pilates, cardio, toning,other,user)
+	db.session.add(data)
+	db.session.commit()	
+	return 'success'	
+
 def show_indulgences(user):
 	occassions = []
 	user = User.query.filter_by(email=user).first()

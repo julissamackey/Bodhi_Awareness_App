@@ -63,11 +63,23 @@ def user_outlets():
 		results=log_outlets(new_entry)
 		return results
 
-@app.route('/physical-activity',methods =['GET'])
+@app.route('/physical-activity',methods =['GET', 'POST'])
 def user_physical_activity():
 	user=request.args.get('user')
-	results=show_physical_activity(user)
-	return jsonify(reponse= results)
+	if request.method == 'GET':
+		results=show_physical_activity(user)
+		return jsonify(reponse= results)
+	else:
+		new_entry={
+		'entry_date':datetime.date.today(),
+		'yoga_pilates':request.json['yoga_pilates'],
+		'cardio':request.json['cardio'],
+		'toning':request.json['toning'],
+		'other':request.json['other'],
+		'user':user
+		}
+		results= log_physical_activity(new_entry)
+		return results
 
 @app.route('/indulgences', methods = ['GET'])
 def user_indulgences():

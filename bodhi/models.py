@@ -121,6 +121,14 @@ class Physical_Activity(db.Model):
 	other = db.Column(db.Boolean, default=False)
 	user_id= db.Column(db.Integer, db.ForeignKey('user.id'))
 
+	def __init__(self, entry_date,yoga_pilates,cardio,toning,other,user):
+		self.entry_date=entry_date
+		self.yoga_pilates=yoga_pilates
+		self.cardio=cardio
+		self.toning=toning
+		self.other=other
+		self.user=user
+
 	def serialize(self):
 		return{
 		'id':self.id,
