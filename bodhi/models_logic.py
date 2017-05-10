@@ -98,6 +98,19 @@ def show_indulgences(user):
 		occassions.append(t)
 	return occassions	
 
+def log_indulgences(new_entry):
+	entry_date = new_entry['entry_date']
+	alcohol = new_entry['alcohol']
+	tobacco = new_entry['tobacco']
+	sweets = new_entry['sweets']
+	coffee = new_entry['coffee']
+	other = new_entry['other']
+	user = User.query.filter_by(email=new_entry['user']).first()
+	data = Indulgences(entry_date,alcohol,tobacco,sweets,coffee,other,user)
+	db.session.add(data)
+	db.session.commit()	
+	return 'success'
+
 def show_diet(user):
 	occassions = []
 	user = User.query.filter_by(email=user).first()

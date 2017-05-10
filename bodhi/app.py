@@ -81,11 +81,24 @@ def user_physical_activity():
 		results= log_physical_activity(new_entry)
 		return results
 
-@app.route('/indulgences', methods = ['GET'])
+@app.route('/indulgences', methods = ['GET', 'POST'])
 def user_indulgences():
 	user = request.args.get('user')
-	results= show_indulgences(user)
-	return jsonify(resposne=results)
+	if request.method == 'GET':
+		results= show_indulgences(user)
+		return jsonify(resposne=results)
+	else:
+		new_entry={
+		'entry_date':datetime.date.today(),
+		'alcohol':request.json['alcohol'],
+		'tobacco':request.json['tobacco'],
+		'sweets':request.json['sweets'],
+		'coffee':request.json['coffee'],
+		'other':request.json['other'],
+		'user':user
+		}
+		results = log_indulgences(new_entry)
+		return results
 
 @app.route('/diet', methods=['GET'])
 def user_diet():

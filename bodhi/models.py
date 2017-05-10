@@ -147,9 +147,18 @@ class Indulgences(db.Model):
 	alcohol = db.Column(db.Boolean, default=False)
 	tobacco = db.Column(db.Boolean,default=False)
 	sweets = db.Column(db.Boolean, default=False)
-	other = db.Column(db.Boolean, default=False)
 	coffee = db.Column(db.Boolean,default=False)
+	other = db.Column(db.Boolean, default=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+	def __init__(self, entry_date, alcohol,tobacco,sweets,coffee, other,user):
+		self.entry_date=entry_date
+		self.alcohol=alcohol
+		self.tobacco=tobacco
+		self.sweets=sweets
+		self.coffee=coffee
+		self.other=other
+		self.user=user
 
 	def serialize(self):
 		return{
