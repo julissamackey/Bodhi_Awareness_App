@@ -240,6 +240,20 @@ class Cognitive_Condition(db.Model):
 	mindful = db.Column(db.Boolean,default=False)
 	user_id=db.Column(db.Integer, db.ForeignKey('user.id'))
 
+	def __init__(self,entry_date,energized,calm,irritable,confident,anxious,distracted,focused,creative,apathetic,mindful,user):
+		self.entry_date=entry_date
+		self.energized=energized
+		self.calm=calm
+		self.irritable=irritable
+		self.confident=confident
+		self.anxious=anxious
+		self.distracted=distracted
+		self.focused=focused
+		self.creative=creative
+		self.apathetic=apathetic
+		self.mindful=mindful
+		self.user=user
+
 	def serialize(self):
 		return{
 		'id':self.id,

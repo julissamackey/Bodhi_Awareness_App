@@ -161,6 +161,24 @@ def show_cog_cond(user):
 		occassions.append(t)
 	return occassions	
 
+def log_cog_cond(new_entry):
+	entry_date = new_entry['entry_date']
+	energized = new_entry['energized']
+	calm = new_entry['calm']
+	irritable = new_entry['irritable']
+	confident = new_entry['confident']
+	anxious = new_entry['anxious']
+	distracted = new_entry['distracted']
+	focused = new_entry['focused']
+	creative = new_entry['creative']
+	apathetic = new_entry['apathetic']
+	mindful = new_entry['mindful']
+	user = User.query.filter_by(email=new_entry['user']).first()
+	data = Cognitive_Condition(entry_date,energized,calm,irritable,confident,anxious,distracted,focused,creative,apathetic,mindful,user)
+	db.session.add(data)
+	db.session.commit()	
+	return 'success'
+
 def show_physical_cond(user):
 	occassions = []
 	user = User.query.filter_by(email=user).first()

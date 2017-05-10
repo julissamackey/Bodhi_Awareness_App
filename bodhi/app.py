@@ -135,11 +135,29 @@ def user_sleep():
 		results = log_sleep(new_entry)
 		return results
 
-@app.route('/cog-cond', methods = ['GET'])
+@app.route('/cog-cond', methods = ['GET','POST'])
 def user_cog_cond():
 	user = request.args.get('user')
-	results = show_cog_cond(user)
-	return jsonify(response=results)
+	if request.method == 'GET':
+		results = show_cog_cond(user)
+		return jsonify(response=results)
+	else:
+		new_entry={
+		'entry_date':datetime.date.today(),
+		'energized':request.json['energized'],
+		'calm':request.json['calm'],
+		'irritable':request.json['irritable'],
+		'confident':request.json['confident'],
+		'anxious':request.json['anxious'],
+		'distracted':request.json['distracted'],
+		'focused':request.json['focused'],
+		'creative':request.json['creative'],
+		'apathetic':request.json['apathetic'],
+		'mindful':request.json['mindful'],
+		'user':user						
+		}
+		results=log_cog_cond(new_entry)
+		return results	
 
 @app.route('/physical-cond', methods=['GET'])
 def user_physical_cond():
