@@ -42,7 +42,7 @@ class User(db.Model):
 		}
 
 class Stress(db.Model):
-	__tablename__='stress_level'
+	__tablename__='stress'
 	id = db.Column(db.Integer,primary_key=True)
 	entry_date = db.Column(db.TIMESTAMP)
 	level= db.Column(db.Integer)
@@ -55,6 +55,19 @@ class Stress(db.Model):
 	other = db.Column(db.Boolean, default=False)
 	pms = db.Column(db.Boolean, default=False)  
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+	def __init__(self, entry_date, level, relationship, family, school, friends,work, unclear,other,pms,user):
+		self.entry_date =entry_date
+		self.level=level
+		self.relationship = relationship
+		self.family = family
+		self.school = school
+		self.friends = friends
+		self.work = work
+		self.unclear=unclear
+		self.other = other
+		self.pms = pms
+		self.user=user
 
 	def serialize(self):
 		return{

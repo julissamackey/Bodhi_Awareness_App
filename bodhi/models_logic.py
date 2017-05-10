@@ -2,9 +2,25 @@ from models import *
 
 def find_user(user,password):
 	user = User.query.filter_by(email=user).first()
-	if user.password != password:
+	if user.password != password or user == None:
 		return False
 	return user.serialize()
+
+def add_user(new_user):
+	first_name= new_user['first_name']
+	last_name = new_user['last_name']
+	email=new_user['email']
+	password=new_user['password']
+	gender=new_user['password']
+	join_date = new_user['join_date']
+	account_already_exists = find_user(email,password)
+	if account_already_exists == False:
+		new_account = User(first_name,last_name,email,password,gender,join_date)
+		db.session.add(new_account)
+		db.session.commit()
+		return 'success'
+	else:
+		return 'user already has an account'
 
 def show_stress(user):
 	occassions = []
@@ -14,6 +30,23 @@ def show_stress(user):
 		t = entry.serialize()
 		occassions.append(t)
 	return occassions
+
+def log_stress(new_entry):
+	entry_date = new_entry['entry_date']
+	level = new_entry['level']
+	relationship = new_entry['relationship']
+	family = new_entry['family']
+	school = new_entry['school']
+	friends = new_entry['friends']
+	work = new_entry['work']
+	unclear = new_entry['unclear']
+	other = new_entry['other']
+	pms = new_entry['pms']
+	user = User.query.filter_by(email=new_entry['user']).first()
+	data = Stress(entry_date, level,relationship,family,school, friends, work, unclear, other, pms,user)
+	db.session.add(data)
+	db.session.commit()	
+	return 'success'
 
 def show_outlets(user):
 	occassions = []

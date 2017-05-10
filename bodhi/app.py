@@ -2,20 +2,50 @@ from flask import render_template, request, jsonify
 from config import db, app
 from models_logic import *
 import json
+import datetime
 
-@app.route('/log-in',methods=['GET'])
+@app.route('/log-in',methods=['POST', 'GET'])
 def verify_user():
-	user = request.args.get('user')
-	password = request.args.get('password')
-	user_info = find_user(user, password)
-	return jsonify(response=user_info)	
+	if request == 'GET':
+		user = request.args.get('user')
+		password = request.args.get('password')
+		user_info = find_user(user, password)
+		return jsonify(response=user_info)
+	else:
+		new_user={
+		'first_name':request.json["first_name"],
+		"last_name":request.json['last_name'],
+		"email":request.json['email'],
+		"password":request.json['password'],
+		"gender":request.json['gender'],
+		"join_date":datetime.date.today()
+		}
+		results = add_user(new_user)
+		return results		
 
-@app.route('/stress', methods=['GET'])
+@app.route('/stress', methods=['GET','POST'])
 def user_stress():
-	user = request.args.get('user')
-	results = show_stress(user)
-	return jsonify(response=results)
-
+	user = request.args.get('user')	
+	if request == 'GET':
+		results = show_stress(user)
+		return jsonify(response=results)
+	else:
+		new_entry={
+		'entry_date':datetime.date.today(),
+		'level':request.json['level'],
+		'relationship':request.json['relationship'],
+		'family':request.json['family'],
+		'school':request.json['school'],
+		'friends':request.json['friends'],
+		'work':request.json['work'],
+		'unclear':request.json['unclear'],
+		'other':request.json['other'],
+		'pms':request.json['pms'],
+		'user':user
+		}
+		results = log_stress(new_entry)
+		return results
+			
 @app.route('/outlets', methods=['GET'])
 def user_outlets():
 	user = request.args.get('user')
