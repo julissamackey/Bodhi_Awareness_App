@@ -141,6 +141,17 @@ def show_sleep(user):
 		occassions.append(t)
 	return occassions
 
+def log_sleep(new_entry):
+	entry_date = new_entry['entry_date']
+	hours = int(new_entry['hours'])
+	quality = new_entry['quality']
+	user = User.query.filter_by(email=new_entry['user']).first()
+	data = Sleep(entry_date,hours,quality,user)
+	db.session.add(data)
+	db.session.commit()	
+	return 'success'	
+
+
 def show_cog_cond(user):
 	occassions = []
 	user = User.query.filter_by(email=user).first()

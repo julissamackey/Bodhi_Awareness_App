@@ -209,6 +209,12 @@ class Sleep(db.Model):
 	quality = db.Column(db.Boolean, default=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+	def __init__(self,entry_date,hours,quality,user):
+		self.entry_date=entry_date
+		self.hours=hours
+		self.quality=quality
+		self.user=user
+
 	def serialize(self):
 		return{
 		'id':self.id,

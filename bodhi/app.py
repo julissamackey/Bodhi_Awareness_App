@@ -119,11 +119,21 @@ def user_diet():
 		return results
 
 
-@app.route('/sleep',methods=['GET'])
+@app.route('/sleep',methods=['GET', 'POST'])
 def user_sleep():
 	user = request.args.get('user')
-	results = show_sleep(user)
-	return jsonify(response=results)
+	if request.method == 'GET':
+		results = show_sleep(user)
+		return jsonify(response=results)
+	else:
+		new_entry={
+		'entry_date':datetime.date.today(),
+		'hours':request.json['hours'],
+		'quality':request.json['quality'],
+		'user':user			
+		}
+		results = log_sleep(new_entry)
+		return results
 
 @app.route('/cog-cond', methods = ['GET'])
 def user_cog_cond():
