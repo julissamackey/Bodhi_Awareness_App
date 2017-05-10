@@ -215,6 +215,14 @@ def show_sexual_activity(user):
 		occassions.append(t)
 	return occassions		
 
+def log_sexual_activity(new_entry):
+	entry_date = new_entry['entry_date']
+	user = User.query.filter_by(email=new_entry['user']).first()
+	data = Sexual_Activity(entry_date,user)
+	db.session.add(data)
+	db.session.commit()	
+	return 'success'	 	
+
 def show_goals(user):
 	occassions = []
 	user = User.query.filter_by(email=user).first()

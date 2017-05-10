@@ -183,11 +183,19 @@ def user_physical_cond():
 		results = log_physical_cond(new_entry)
 		return results
 
-@app.route('/sexual-activity', methods=['GET'])
+@app.route('/sexual-activity', methods=['GET','POST'])
 def user_sexual_activity():
 	user = request.args.get('user')
-	results = show_sexual_activity(user)
-	return jsonify(resposne = results)
+	if request.method == 'GET':
+		results = show_sexual_activity(user)
+		return jsonify(resposne = results)
+	else:
+		new_entry={
+		'entry_date':datetime.date.today(),
+		'user':user			
+		}
+		results= log_sexual_activity(new_entry)
+		return results
 
 @app.route('/goals', methods=['GET'])
 def user_goals():

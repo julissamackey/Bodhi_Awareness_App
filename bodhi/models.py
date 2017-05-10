@@ -324,6 +324,10 @@ class Sexual_Activity(db.Model):
 	entry_date=db.Column(db.TIMESTAMP)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+	def __init__(self, entry_date,user):
+		self.entry_date=entry_date
+		self.user=user
+
 	def serialize(self):
 		return{
 		'id':self.id,
