@@ -120,6 +120,18 @@ def show_diet(user):
 		occassions.append(t)
 	return occassions
 
+def log_diet(new_entry):
+	entry_date = new_entry['entry_date']
+	fast = new_entry['fast']
+	dairy = new_entry['dairy']
+	gluten = new_entry['gluten']
+	meat = new_entry['meat']
+	user = User.query.filter_by(email=new_entry['user']).first()
+	data = Diet(entry_date,fast,dairy,gluten,meat,user)
+	db.session.add(data)
+	db.session.commit()	
+	return 'success'	
+
 def show_sleep(user):
 	occassions = []
 	user = User.query.filter_by(email=user).first()

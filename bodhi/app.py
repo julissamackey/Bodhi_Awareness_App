@@ -100,11 +100,24 @@ def user_indulgences():
 		results = log_indulgences(new_entry)
 		return results
 
-@app.route('/diet', methods=['GET'])
+@app.route('/diet', methods=['GET', 'POST'])
 def user_diet():
 	user = request.args.get('user')
-	results = show_diet(user)
-	return jsonify(response=results)
+	if request.method == 'GET':
+		results = show_diet(user)
+		return jsonify(response=results)
+	else:
+		new_entry={
+		'entry_date':datetime.date.today(),
+		'fast':request.json['fast'],
+		'dairy':request.json['dairy'],
+		'gluten':request.json['gluten'],
+		'meat':request.json['meat'],
+		'user':user	
+		}
+		results = log_diet(new_entry)
+		return results
+
 
 @app.route('/sleep',methods=['GET'])
 def user_sleep():

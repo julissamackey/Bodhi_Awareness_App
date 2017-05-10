@@ -182,6 +182,14 @@ class Diet(db.Model):
 	meat = db.Column(db.Boolean, default=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+	def __init__(self, entry_date,fast,dairy,gluten,meat,user):
+		self.entry_date=entry_date
+		self.fast=fast
+		self.dairy=dairy
+		self.gluten=gluten
+		self.meat=meat
+		self.user=user
+
 	def serialize(self):
 		return{
 		'id':self.id,
@@ -190,7 +198,7 @@ class Diet(db.Model):
 		'dairy':self.dairy,
 		'gluten':self.gluten,
 		'meat':self.meat,
-		'user_id':self.user_id
+		'user':self.use
 		}
 
 class Sleep(db.Model):
