@@ -20,7 +20,7 @@ class User(db.Model):
 	physical_condition = db.relationship('Physical_Condition', backref='user', lazy='dynamic')
 	sexual_activity = db.relationship('Sexual_Activity', backref='user', lazy='dynamic')
 	goals = db.relationship('Goals', backref='user', lazy = 'dynamic')
-	to_do= db.relationship('Tasks', backref ='user', lazy='dynamic')
+	tasks= db.relationship('Tasks', backref ='user', lazy='dynamic')
 
 	def __init__(self, first_name, last_name, email, password, gender, join_date):
 		self.first_name = first_name
@@ -359,12 +359,18 @@ class Goals(db.Model):
 		}
 
 class Tasks(db.Model):
-	__tablename__='to_do'
+	__tablename__='tasks'
 	id = db.Column(db.Integer, primary_key=True)
 	entry_date=db.Column(db.TIMESTAMP)
 	task = db.Column(db.String(40))
 	complete = db.Column(db.Boolean, default=False)
 	user_id= db.Column(db.Integer, db.ForeignKey('user.id'))
+
+	def __init__(self,entry_date,task,complete,user):
+		self.entry_date=entry_date
+		self.task=task
+		self.complete=complete
+		self.user=user
 
 	def serialize(self):
 		return{

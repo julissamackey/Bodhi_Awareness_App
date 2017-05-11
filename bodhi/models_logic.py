@@ -251,3 +251,12 @@ def show_user_tasks(user):
 		occassions.append(t)
 	return occassions				
 
+def log_tasks(new_entry):
+	entry_date = new_entry['entry_date']
+	task = new_entry['task']
+	complete = new_entry['complete']
+	user = User.query.filter_by(email=new_entry['user']).first()
+	data = Tasks(entry_date,task,complete,user)
+	db.session.add(data)
+	db.session.commit()	
+	return 'success'	

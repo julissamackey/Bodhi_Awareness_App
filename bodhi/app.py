@@ -213,11 +213,21 @@ def user_goals():
 		results = log_goals(new_entry)
 		return results
 
-@app.route('/tasks', methods=['GET'])
+@app.route('/tasks', methods=['GET','POST'])
 def user_tasks():
 	user=request.args.get('user')
-	results = show_user_tasks(user)
-	return jsonify(response = results)
+	if request.method == 'GET':
+		results = show_user_tasks(user)
+		return jsonify(response = results)
+	else:
+		new_entry={
+		'entry_date':datetime.date.today(),
+		'task':request.json['task'],
+		'complete':request.json['task'],
+		'user':user
+		}
+		results = log_tasks(new_entry)
+		return results
 
 if __name__  ==	"__main__":
 	app.run(debug=True, threaded=True, port= 3000)
