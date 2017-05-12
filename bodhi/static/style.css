@@ -1,0 +1,19 @@
+body{
+	color: gray;
+	font-family: Josefin Sans;
+	/*background-image: url('http://3.bp.blogspot.com/-8-DO6zppqW8/Tv9dMmUQBsI/AAAAAAAABkY/KE2Hws1NVqM/s1600/600px-Seed-of-Life.svg.png');*/
+	background-repeat: no-repeat;
+	height: 100vh;
+}
+button{
+	background-color: #00AAFFFF;
+}
+/*.quote{
+	-webkit-transition-timing-function: ease-in-out;
+}*/
+div.quote{
+	display: none;
+}
+div.begin{
+	display: none;
+}

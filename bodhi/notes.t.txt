@@ -1,0 +1,9 @@
+get & post requests are complete
+
+before moving on: what possible put requests would I need?
+To update a user's email, password, gender, last name and possibly even first name?
+No DELETE requests. No DELETING ever happens.
+
+user stories:
+the landing page's call to action is for the user to create an account. 
+This CTA should be a prominent, brightly colored button.

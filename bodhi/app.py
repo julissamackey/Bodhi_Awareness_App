@@ -4,12 +4,25 @@ from models_logic import *
 import json
 import datetime
 
+@app.route('/')
+def landing_page():
+	return render_template('index.html')
+
+@app.route('/log-in-form')
+def log_in():
+	return render_template('login.html')
+
+@app.route('/sign-up-form')
+def sign_up():	
+	return render_template('signup.html')
+	
 @app.route('/log-in',methods=['POST', 'GET'])
 def verify_user():
-	if request == 'GET':
+	if request.method == 'GET':
 		user = request.args.get('user')
 		password = request.args.get('password')
 		user_info = find_user(user, password)
+		print('********************{}'.format(user_info))
 		return jsonify(response=user_info)
 	else:
 		new_user={
@@ -26,7 +39,7 @@ def verify_user():
 @app.route('/stress', methods=['GET','POST'])
 def user_stress():
 	user = request.args.get('user')	
-	if request == 'GET':
+	if request.method == 'GET':
 		results = show_stress(user)
 		return jsonify(response=results)
 	else:

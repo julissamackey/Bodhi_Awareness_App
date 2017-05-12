@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='style.css')}}">	
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 	
+	<title>bodhi</title>
+</head>
+<body>
+	<header>
+		<div class="navbar-fixed">
+		    <nav>
+		    <div class="nav-wrapper teal darken-4 lighten-2 ">
+		      <a href="#!" class="brand-logo center white-text">bodhi</a>
+		      <ul class="right hide-on-med-and-down white-text">
+		        <li><a class='white-text' href="/">back</a></li>
+		      </ul>
+		    </div>
+		  </nav>
+  		</div>
+	</header>
+		<main class="container teal-text darken -3">
+			<div class="row">
+				<form class='col s6 offset-s3 createAccount'>	
+  					<div><input type="text" placeholder="first name"></div>
+					<div><input type="text" placeholder="last name"></div>
+					<div><input id='newUserEmail' type="text" name="email" placeholder="e-mail address"></div>
+					<div><input id = 'newUserPassword' type="password" name="password" placeholder="password"></div>
+					<div class="input-field">
+				    <select>
+				      <option value="" disabled selected>select one</option>
+				      <option value="1">female</option>
+				      <option value="2">male</option>
+				      <option value="3">n/a</option>
+				    </select>
+				    <label>Gender</label>
+				  </div>
+					<div><input type="submit" value="logIn"></div>
+				</form>
+			</div>
+			<div class='row'>
+				<button class ='showUserStuff col s5 offset-s1' style="display: none">yay. this button will do something.</button>
+				<button class ='userNotFound col s5 offset-s1' style="display: none">aw, man. maybe they haven't signed up.</button>
+				<button class ='userNotFound col s5 offset-s1' style="display: none">maybe they forgot their password</button>			
+			</div>
+		</main>
+	<footer></footer>
+</body>
+
+<script type="text/javascript" src= "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+<script type="text/javascript" src = "{{ url_for ('static', filename='main.js')}}"></script>
+</html>

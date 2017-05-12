@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='style.css')}}">	
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 	
+	<title>bodhi</title>
+</head>
+<body>
+	<header>
+		<div class="navbar-fixed">
+		    <nav>
+		    <div class="nav-wrapper teal darken-4 lighten-2 ">
+		      <a href="#!" class="brand-logo center white-text">bodhi</a>
+		      <ul class="right hide-on-med-and-down white-text">
+		      	<li><a class ='white-text' href="/sign-up-form">Sign UP</a></li>
+		        <li><a class='white-text' href="/log-in-form">Sign In</a></li>
+		      </ul>
+		    </div>
+		  </nav>
+  		</div>
+	</header>
+	
+	<main>
+		<div class='container'>
+			<div class = 'quote row'>
+				<h5 class='col s9 offset-s3'>'until you make the unconscious conscious, it will direct your life and you will call it fate'</h5>
+			</div>
+			<div class = 'quote row'>
+				<p class = 'col s3 offset-s6'>Carl Jung</p>
+			</div>
+		</div>
+	</main>
+	<footer class="page-footer teal darken-4 lighten-2">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text"> Content</h5>
+            <p class="white-text"> You can use rows and columns here to organize your footer content.</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="white-textf="#!">Link 1</a></li>
+              <li><a class="white-textf="#!">Link 2</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+          <div class="footer-copyright">
+            <div class="container white-text">         
+            © 2014 Copyright Text
+            <a class="white-textf="#!">More Links</a>
+            </div>
+          </div>
+    </footer>
+</body>
+<script type="text/javascript" src= "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src = "{{ url_for ('static', filename='main.js')}}"></script>
+</html>
