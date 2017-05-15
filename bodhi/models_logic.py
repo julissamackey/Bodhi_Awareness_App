@@ -11,7 +11,7 @@ def add_user(new_user):
 	last_name = new_user['last_name']
 	email=new_user['email']
 	password=new_user['password']
-	gender=new_user['password']
+	gender=new_user['gender']
 	if gender == '2':
 		gender = 'M'
 	elif gender == '1':

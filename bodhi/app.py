@@ -16,24 +16,28 @@ def log_in():
 def sign_up():	
 	return render_template('signup.html')
 	
-@app.route('/log-in',methods=['POST', 'GET'])
+@app.route('/log-in',methods=['GET'])
 def verify_user():
-	if request.method == 'GET':
+	# if request.method == 'GET':
 		user = request.args.get('user')
 		password = request.args.get('password')
 		user_info = find_user(user, password)
 		return jsonify(response=user_info)
-	else:
-		new_user={
-		"email":request.args.get('email'),
-		"password":request.args.get('password'),
-		'first_name':request.args.get('firstName'),
-		"last_name":request.args.get('lastName'),
-		"gender":request.args.get('gender'),
-		"join_date":datetime.date.today()
-		}
-		results = add_user(new_user)
-		return results		
+	# else:
+
+
+@app.route('/sign-up', methods= ['POST'])		
+def register_user():
+	new_user={
+	"email":request.args.get('email'),
+	"password":request.args.get('password'),
+	'first_name':request.args.get('firstName'),
+	"last_name":request.args.get('lastName'),
+	"gender":request.args.get('gender'),
+	"join_date":datetime.date.today()
+	}
+	results = add_user(new_user)
+	return results		
 
 @app.route('/stress', methods=['GET','POST'])
 def user_stress():

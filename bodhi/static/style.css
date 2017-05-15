@@ -1,19 +1,20 @@
 body{
-	color: gray;
-	font-family: Josefin Sans;
+	color: black;
+	font-weight: lighter;
 	/*background-image: url('http://3.bp.blogspot.com/-8-DO6zppqW8/Tv9dMmUQBsI/AAAAAAAABkY/KE2Hws1NVqM/s1600/600px-Seed-of-Life.svg.png');*/
 	background-repeat: no-repeat;
-	height: 100vh;
+	display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
-button{
-	background-color: #00AAFFFF;
+main{
+	flex: 1 0 auto;	
 }
-/*.quote{
-	-webkit-transition-timing-function: ease-in-out;
-}*/
 div.quote{
 	display: none;
+	font-weight: lighter;
 }
 div.begin{
 	display: none;
+	font-weight: lighter;
 }
