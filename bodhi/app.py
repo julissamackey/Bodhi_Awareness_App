@@ -22,15 +22,14 @@ def verify_user():
 		user = request.args.get('user')
 		password = request.args.get('password')
 		user_info = find_user(user, password)
-		print('********************{}'.format(user_info))
 		return jsonify(response=user_info)
 	else:
 		new_user={
-		'first_name':request.json["first_name"],
-		"last_name":request.json['last_name'],
-		"email":request.json['email'],
-		"password":request.json['password'],
-		"gender":request.json['gender'],
+		"email":request.args.get('email'),
+		"password":request.args.get('password'),
+		'first_name':request.args.get('firstName'),
+		"last_name":request.args.get('lastName'),
+		"gender":request.args.get('gender'),
 		"join_date":datetime.date.today()
 		}
 		results = add_user(new_user)

@@ -7,7 +7,7 @@ $(document).ready(function(){
 	var username = "";
 	var password = "";
 	var baseURL = "http://127.0.0.1:3000/"
-	var logInEP = "log-in?user=" //blank&password=blank 
+	var logInEP = "log-in?" //blank&password=blank 
 
 	console.log('hello world');
 
@@ -22,12 +22,20 @@ $(document).ready(function(){
 
 	$('.createAccount').submit(function(event){
 		event.preventDefault();
-		username = document.getElementById('newUserEmail').value;
-		password = document.getElementById('newUserPassword').value;
+		var firstName = document.getElementById('firstName').value;
+		var lastName = document.getElementById('lastName').value;
+		var email = document.getElementById('email').value;
+		var password = document.getElementById('password').value;
+		var genderSelection = document.getElementById('gender');
+		var gender = genderSelection.value;
 		console.log(username);
 		console.log(password);
-		signUpAjax(baseURL+logInEP+username+'&password='+password)
+		console.log(firstName);
+		console.log(lastName);
+		console.log(gender);
+		signUpAjax(baseURL+logInEP+'email='+email+'&password='+password+'&firstName='+firstName+'&lastName='+lastName+'&gender='+gender)
 	})	
+
 
 	var signUpAjax = function(url){
 		var xhr = new XMLHttpRequest();

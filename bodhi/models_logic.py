@@ -12,6 +12,12 @@ def add_user(new_user):
 	email=new_user['email']
 	password=new_user['password']
 	gender=new_user['password']
+	if gender == '2':
+		gender = 'M'
+	elif gender == '1':
+		gender = 'F'
+	else:
+		gender = 'N/A'
 	join_date = new_user['join_date']
 	account_already_exists = find_user(email,password)
 	if account_already_exists == False:
