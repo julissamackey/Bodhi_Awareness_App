@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var username = "";
 	var password = "";
 	var baseURL = "http://127.0.0.1:3000/"
-	var logInEP = "log-in?" //blank&password=blank 
+	var logInEP = "log-in?user=" //blank&password=blank 
 
 	console.log('hello world');
 

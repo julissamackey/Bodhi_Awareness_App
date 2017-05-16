@@ -16,13 +16,13 @@ def log_in():
 def sign_up():	
 	return render_template('signup.html')
 	
-@app.route('/log-in',methods=['GET'])
+@app.route('/log-in')
 def verify_user():
 	# if request.method == 'GET':
-		user = request.args.get('user')
-		password = request.args.get('password')
-		user_info = find_user(user, password)
-		return jsonify(response=user_info)
+	user = request.args.get('user')
+	password = request.args.get('password')
+	user_info = find_user(user, password)
+	return jsonify(response=user_info)
 	# else:
 
 
