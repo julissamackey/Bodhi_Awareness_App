@@ -2,57 +2,43 @@ $(document).ready(function(){
 
 	$('select').material_select();
 
-	var username = "";
+	var firstName = "";
+	var lastName = "";
+	var email = "";
 	var password = "";
-	var baseURL = "http://127.0.0.1:3000/"
-	var logInEP = "sign-up?" //blank&password=blank 
+	var gender = ""; 
+	var baseURL = "http://127.0.0.1:3000/sign-up?"
 
 	console.log('hello world - sign up page');
 	
 	$('.createAccount').submit(function(event){
-		event.preventDefault();
-		var firstName = document.getElementById('firstName').value;
-		var lastName = document.getElementById('lastName').value;
-		var email = document.getElementById('email').value;
-		var password = document.getElementById('password').value;
-		var genderSelection = document.getElementById('gender');
-		var gender = genderSelection.value;
-		console.log(username);
-		console.log(password);
-		console.log(firstName);
-		console.log(lastName);
-		console.log(gender);
-		signUpAjax(baseURL+logInEP+'email='+email+'&password='+password+'&firstName='+firstName+'&lastName='+lastName+'&gender='+gender)
-	})
-
-	
-
-	var signUpAjax = function(url){
-		var xhr = new XMLHttpRequest();
-		xhr.open('POST', url, true);
-		xhr.onload = function(){
-			if (xhr.status >= 200 && xhr.status < 400){
-				var response = xhr.responseText;
-				logInSuccess(response);	
-			}else{
-				logInFail(response);
+		event.preventDefault();	
+			firstName = document.getElementById('firstName').value;
+			lastName = document.getElementById('lastName').value;
+			email = document.getElementById('email').value;
+			password = document.getElementById('password').value;
+			var genderSelection = document.getElementById('gender');
+			gender = genderSelection.value;	
+		var formData = {
+			firstName: firstName, 
+			lastName: lastName,
+			email: email,
+			password: password,
+			gender: gender
 			}
-		};
-		xhr.onerror = function(){
-			console.log('eeerrrrrr')
-		}
-		xhr.send();
-	}; 	
+		signUpAjax(formData)	
+		})
 
-	var logInFail=function(res){
-		console.log('user not found');
-		$('.logIn').hide();
-		$('.userNotFound').fadeIn(2000);
+	var signUpAjax = function(formData){
+	
+		  $.ajax({
+		    method: "POST",
+		    url:baseURL+'email='+email+'&password='+password+"&firstName="+firstName+"&lastName="+lastName+"&gender="+gender,
+		    success: function(result){
+		      console.log(result);
+		    }
+		  })
 	}
 
-	var logInSuccess=function(res){
-		console.log('success!');
-		$('.logIn').hide();
-		$('.showUserStuff').fadeIn(2000);		
-	}
+
 })

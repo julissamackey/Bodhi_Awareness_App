@@ -2,9 +2,12 @@ from models import *
 
 def find_user(user,password):
 	user = User.query.filter_by(email=user).first()
-	if user.password != password or user == None:
+	if user == None:
 		return False
+	elif user.password != password:
+		return False 
 	return user.serialize()
+
 
 def add_user(new_user):
 	first_name= new_user['first_name']

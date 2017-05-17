@@ -8,3 +8,5 @@ I think for the signin and sign up page I don't need AJAX since I will be refesh
 user stories:
 the landing page's call to action is for the user to create an account. 
 This CTA should be a prominent, brightly colored button.
+
+
