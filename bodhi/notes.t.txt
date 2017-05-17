@@ -10,3 +10,7 @@ the landing page's call to action is for the user to create an account.
 This CTA should be a prominent, brightly colored button.
 
 
+Once a user signs up I think it is obvious to need a tutorial. I like matirealize's options for scroll fire so that as theylook upon the log the first time they are able to see helpful tips and how-to's.
+
+The home page should show a viewers log. My inspriation is something like Mint only cleaner.
+For this reason before the log is shown I have to work on my graphs! C3 here I come. 

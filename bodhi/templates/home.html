@@ -11,30 +11,17 @@
 	<header>
 		<div class="navbar-fixed">
 		    <nav>
-		    <div class="nav-wrapper white">
+		    <div class="nav-wrapper white ">
 		      <a href="#!" class="brand-logo center black-text"><img src="data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/wAALCAAiACIBAREA/8QAGgAAAwADAQAAAAAAAAAAAAAAAwQFAAIGCP/EACoQAAICAQMCBQQDAQAAAAAAAAECAwQRABIhBTETIkFRYQYVI3EUMoEz/9oACAEBAAA/APTfUrzVmhgrxiW3O22NCcAepZj6AAE+5xgaU6hQdgrS3LUtmQhI0V/DjzyT5QMEYBPm3HA9dCq9LaOx4M1uwkwXxI3rkRIwBGfIBtyMj+2c5HyA7Fclr31p3cMJF3QzgY347qw9G5HPY54x21R1zkcbWbH3G00iVzYeMKrFcICUVyRzgkcDOMOSe/AuoV1M8FmKw0EUczIkPjMqMACpZgDxluMjsDk55AHGkfUb8M1Kd66JG2yDxmUOSQMMAfXDcL2wCc5A05NUjvmI9PZ4SITIfMcKWA2qRyAe5yOQVB/b9DqsE9GtNO6QzSRq7xscFGIBII+NJUrLNCOlsRHYWWSI+/gqThgPldg+C2fbM6fp9CjW+2KjxtNIyCJWyZY+WG3PJOML3GCcnjuLpfS6fRQemzq35VZvBRv+zAjhSeTkH4wVOeCNV6aw/TlWKByFgaMttBz+UcsFJ755PPbafTsGp9Px2qsNi6XS3KiyTKvYORlgP9zpvrNEtPDbirrZCODLAQMsMEblzxuAOfnaBngaDaTpUiJZiWrI9d9zq5G/BBBU7uQec4PqAONawfaLVg2iKv8AHhQrvmxuJOOTu5AGMDPuf92jpR3epJJDAqUokIMzDLWCSOATztAHc8EHA451e1mkOr1a8kElh4ImsRodkpQFl/R7jU36ahiuVxYtxJPYjfySyqGZf0TyNdDrNf/Z">bodhi</a>
 		      <ul class="left hide-on-med-and-down black-text">
-		        <li><a class='black-text' href="/">back</a></li>
+    		   <li><a class='black-text' href="/">back</a></li>
 		      </ul>
 		    </div>
 		  </nav>
-  		</div>
+  		</div>		
 	</header>
-	<main class="container black-text">
-		<div class="row">
-			<form id='logForm' action = '/home'class='col s6 offset-s3 logIn'>
-				<div><p>e-mail: </p><input id='existingUserEmail' type="text" name="email" placeholder="e-mail address"></div>
-				<div><p>password: </p><input id = 'existingUserPassword'  type="password" name="password" placeholder="password"></div>
-				<div><p><input  type="submit" value="logIn"></p></div>
-			</form>
-		</div>
-		<div class='row'>
-			<button class ='showUserStuff col s5 offset-s1' style="display: none">yay. this button will do something.</button>
-			<button class ='userNotFound col s5 offset-s1' style="display: none">aw, man. maybe they haven't signed up.</button>
-			<button class ='userNotFound col s5 offset-s1' style="display: none">maybe they forgot their password</button>			
-		</div>
-	</main>
-	<footer class="page-footer white">
+	<main></main>
+	<footer>
       <div class="container">
         <div class="row">
           <div class="col l6 s12">
@@ -51,9 +38,11 @@
             © 2014 Copyright Text
             <a class="black-text="#!">More Links</a>
             </div>
-          </div>
-    </footer>
+          </div>		
+	</footer>	
 </body>
+<script src= "https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.9.1/d3.min.js"></script>
 <script type="text/javascript" src= "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src = "{{ url_for ('static', filename='signin.js')}}"></script>
+<script type="text/javascript" src = "{{ url_for ('static', filename='home.js')}}"></script>
 </html>

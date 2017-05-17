@@ -24,8 +24,10 @@ def verify_user():
 	user_info = find_user(user, password)
 	return jsonify(response=user_info)
 	# else:
-
-
+@app.route('/home')
+def go_home():
+	return render_template('home.html')
+	
 @app.route('/sign-up', methods= ['POST'])		
 def register_user():
 	new_user={

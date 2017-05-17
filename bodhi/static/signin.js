@@ -8,7 +8,7 @@ $(document).ready(function(){
 	console.log('hello world');
 
 	$('.logIn').submit(function(event){
-		event.preventDefault();
+		// event.preventDefault();
 		username = document.getElementById('existingUserEmail').value;
 		password = document.getElementById('existingUserPassword').value;
 		console.log(username);
@@ -32,15 +32,16 @@ $(document).ready(function(){
 		xhr.send();
 	}; 
 
-	var logInFail=function(res){
-		console.log('user not found');
-		$('.logIn').hide();
-		$('.userNotFound').fadeIn(2000);
-	}
+	// var logInFail=function(res){
+	// 	console.log('user not found');
+	// 	$('.logIn').hide();
+	// 	$('.userNotFound').fadeIn(2000);
+	// }
 
-	var logInSuccess=function(res){
-		console.log('success!');
-		$('.logIn').hide();
-		$('.showUserStuff').fadeIn(2000);		
-	}
+	// var logInSuccess=function(res){
+	// 	console.log('success!');
+	// 	$('.logIn').hide();
+	// 	// $('.showUserStuff').fadeIn(2000);	
+	// 	$('#logForm').attr('action','/home')	
+	// }
 })
