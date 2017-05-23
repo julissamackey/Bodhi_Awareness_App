@@ -198,7 +198,7 @@ class Diet(db.Model):
 		'dairy':self.dairy,
 		'gluten':self.gluten,
 		'meat':self.meat,
-		'user':self.use
+		'user_id':self.user_id
 		}
 
 class Sleep(db.Model):
@@ -228,6 +228,7 @@ class Cognitive_Condition(db.Model):
 	__tablename__='cognitive_condition'
 	id = db.Column(db.Integer, primary_key=True) 
 	entry_date= db.Column(db.TIMESTAMP)
+	overall= db.Column(db.Integer)
 	energized = db.Column(db.Boolean,default=False)
 	calm = db.Column(db.Boolean,default=False)
 	irritable = db.Column(db.Boolean,default=False)
@@ -240,8 +241,9 @@ class Cognitive_Condition(db.Model):
 	mindful = db.Column(db.Boolean,default=False)
 	user_id=db.Column(db.Integer, db.ForeignKey('user.id'))
 
-	def __init__(self,entry_date,energized,calm,irritable,confident,anxious,distracted,focused,creative,apathetic,mindful,user):
+	def __init__(self,entry_date,overall,energized,calm,irritable,confident,anxious,distracted,focused,creative,apathetic,mindful,user):
 		self.entry_date=entry_date
+		self.overall= overall
 		self.energized=energized
 		self.calm=calm
 		self.irritable=irritable
@@ -275,6 +277,7 @@ class Physical_Condition(db.Model):
 	__tablename__='physical_condition'
 	id = db.Column(db.Integer, primary_key=True)
 	entry_date= db.Column(db.TIMESTAMP)
+	overall = db.Column(db.Integer)
 	sore = db.Column(db.Boolean,default=False)
 	fatigued = db.Column(db.Boolean,default=False)
 	bloated = db.Column(db.Boolean,default=False)
@@ -287,8 +290,9 @@ class Physical_Condition(db.Model):
 	stomach_ache =db.Column(db.Boolean,default=False) 
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-	def __init__(self, entry_date, sore, fatigued,bloated,constipated,nauseous,acne_breakout,hungry,sick,headache,stomach_ache, user):
+	def __init__(self, entry_date, overall, sore, fatigued,bloated,constipated,nauseous,acne_breakout,hungry,sick,headache,stomach_ache, user):
 		self.entry_date=entry_date
+		self.overall = overall
 		self.sore=sore
 		self.fatigued=fatigued
 		self.bloated=bloated
@@ -322,16 +326,19 @@ class Sexual_Activity(db.Model):
 	__tablename__='sexual_activity'
 	id = db.Column(db.Integer, primary_key=True)
 	entry_date=db.Column(db.TIMESTAMP)
+	active = db.Column(db.Boolean, default=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-	def __init__(self, entry_date,user):
+	def __init__(self, entry_date, active, user):
 		self.entry_date=entry_date
+		self.active= active
 		self.user=user
 
 	def serialize(self):
 		return{
 		'id':self.id,
 		'entry_date':self.entry_date,
+		'active':self.active,
 		'user_id':self.user_id
 		}
 

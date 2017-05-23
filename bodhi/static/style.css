@@ -18,3 +18,16 @@ div.begin{
 	display: none;
 	font-weight: lighter;
 }
+#logIn{
+	background-image: url('http://www.pd4pic.com/images/layer-layered-mountain-bliss-gradient-peaceful.jpg');
+	background-size: cover;
+}
+a:link{
+	color:hot pink;
+	/*background-size: cover;*/
+}
+#alert{
+	color: white;
+	font-weight: bolder;
+}
+

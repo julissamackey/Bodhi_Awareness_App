@@ -16,14 +16,15 @@ def log_in():
 def sign_up():	
 	return render_template('signup.html')
 	
-@app.route('/log-in')
+@app.route('/log-in', methods=['POST'])
 def verify_user():
-	# if request.method == 'GET':
-	user = request.args.get('user')
-	password = request.args.get('password')
-	user_info = find_user(user, password)
-	return jsonify(response=user_info)
-	# else:
+	user = {
+	"email": request.json["email"],
+	"password":request.json["password"]
+	}
+	response= find_user(user)
+	return jsonify(response)
+	
 @app.route('/home')
 def go_home():
 	return render_template('home.html')
@@ -43,10 +44,10 @@ def register_user():
 
 @app.route('/stress', methods=['GET','POST'])
 def user_stress():
-	user = request.args.get('user')	
 	if request.method == 'GET':
+		user = request.args.get("email") 
 		results = show_stress(user)
-		return jsonify(response=results)
+		return jsonify(results)
 	else:
 		new_entry={
 		'entry_date':datetime.date.today(),
@@ -62,14 +63,14 @@ def user_stress():
 		'user':user
 		}
 		results = log_stress(new_entry)
-		return results
+		return jsonify(results)
 			
 @app.route('/outlets', methods=['GET', 'POST'])
 def user_outlets():
 	user = request.args.get('user')
 	if request.method == 'GET':
 		results = show_outlets(user)
-		return jsonify(response = results)
+		return jsonify(results)
 	else:
 		new_entry={
 		'entry_date':datetime.date.today(),
@@ -86,7 +87,7 @@ def user_physical_activity():
 	user=request.args.get('user')
 	if request.method == 'GET':
 		results=show_physical_activity(user)
-		return jsonify(reponse= results)
+		return jsonify(results)
 	else:
 		new_entry={
 		'entry_date':datetime.date.today(),
@@ -104,7 +105,7 @@ def user_indulgences():
 	user = request.args.get('user')
 	if request.method == 'GET':
 		results= show_indulgences(user)
-		return jsonify(resposne=results)
+		return jsonify(results)
 	else:
 		new_entry={
 		'entry_date':datetime.date.today(),
@@ -123,7 +124,7 @@ def user_diet():
 	user = request.args.get('user')
 	if request.method == 'GET':
 		results = show_diet(user)
-		return jsonify(response=results)
+		return jsonify(results)
 	else:
 		new_entry={
 		'entry_date':datetime.date.today(),
@@ -142,7 +143,7 @@ def user_sleep():
 	user = request.args.get('user')
 	if request.method == 'GET':
 		results = show_sleep(user)
-		return jsonify(response=results)
+		return jsonify(results)
 	else:
 		new_entry={
 		'entry_date':datetime.date.today(),
@@ -158,7 +159,7 @@ def user_cog_cond():
 	user = request.args.get('user')
 	if request.method == 'GET':
 		results = show_cog_cond(user)
-		return jsonify(response=results)
+		return jsonify(results)
 	else:
 		new_entry={
 		'entry_date':datetime.date.today(),
@@ -182,7 +183,7 @@ def user_physical_cond():
 	user = request.args.get('user')
 	if request.method == 'GET':
 		results = show_physical_cond(user)
-		return jsonify(response= results)
+		return jsonify(results)
 	else:
 		new_entry={
 		'entry_date':datetime.date.today(),
@@ -206,7 +207,7 @@ def user_sexual_activity():
 	user = request.args.get('user')
 	if request.method == 'GET':
 		results = show_sexual_activity(user)
-		return jsonify(resposne = results)
+		return jsonify(results)
 	else:
 		new_entry={
 		'entry_date':datetime.date.today(),
@@ -217,10 +218,10 @@ def user_sexual_activity():
 
 @app.route('/goals', methods=['GET','POST'])
 def user_goals():
-	user = request.args.get('user')
 	if request.method == 'GET':
+		user = request.args.get('user')
 		results = show_goals(user)
-		return jsonify( resposne= results)
+		return jsonify(results)
 	else:
 		new_entry={
 		'entry_date':datetime.date.today(),
@@ -236,7 +237,7 @@ def user_tasks():
 	user=request.args.get('user')
 	if request.method == 'GET':
 		results = show_user_tasks(user)
-		return jsonify(response = results)
+		return jsonify( results)
 	else:
 		new_entry={
 		'entry_date':datetime.date.today(),
